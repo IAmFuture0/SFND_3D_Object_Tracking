@@ -33,6 +33,17 @@ void matchDescriptors(std::vector<cv::KeyPoint> &kPtsSource, std::vector<cv::Key
 
         // ...
     }
+  	/*
+    // visualize the matching result
+  	cv::Mat matchImg = imgRef.clone();
+    cv::drawMatches(imgSource, kPtsSource, imgRef, kPtsRef, matches,
+                    matchImg, cv::Scalar::all(-1), cv::Scalar::all(-1), vector<char>(), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+	
+    string windowName = "Matching keypoints between two camera images (best 50)";
+    cv::namedWindow(windowName, 7);
+    cv::imshow(windowName, matchImg);
+    cv::waitKey(0);
+    */
 }
 
 // Use one of several types of state-of-art descriptors to uniquely identify keypoints
@@ -60,6 +71,15 @@ void descKeypoints(vector<cv::KeyPoint> &keypoints, cv::Mat &img, cv::Mat &descr
     extractor->compute(img, keypoints, descriptors);
     t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
     cout << descriptorType << " descriptor extraction in " << 1000 * t / 1.0 << " ms" << endl;
+  
+    /*
+  	cv::Mat visImage = img.clone();
+    cv::drawKeypoints(img, keypoints, visImage, cv::Scalar::all(-1), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+    string windowName = "Descriptor Results";
+    cv::namedWindow(windowName, 2);
+    imshow(windowName, visImage);
+    cv::waitKey(0);
+    */
 }
 
 // Detect keypoints in image using the traditional Shi-Thomasi detector
