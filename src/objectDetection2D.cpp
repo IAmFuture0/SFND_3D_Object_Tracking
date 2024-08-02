@@ -120,10 +120,12 @@ void detectObjects(cv::Mat& img, std::vector<BoundingBox>& bBoxes, float confThr
             cv::putText(visImg, label, cv::Point(left, top), cv::FONT_ITALIC, 0.75, cv::Scalar(0,0,0),1);
             
         }
-        
-        string windowName = "Object classification";
+      /*
+      	string windowName = "Object classification";
         cv::namedWindow( windowName, 1 );
         cv::imshow( windowName, visImg );
         cv::waitKey(0); // wait for key to be pressed
+      	std::cout << "Wait key" << std::endl;
+        */
     }
 }
