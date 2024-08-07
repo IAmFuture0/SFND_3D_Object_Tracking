@@ -65,6 +65,7 @@ In this final project, you will implement the missing parts in the schematic. To
 - [x] FP.6 Performance Evaluation 2 (Camera TTC result)
   * Description: Run several detector / descriptor combinations and look at the differences in TTC estimation. Find out which methods perform best and also include several examples where camera-based TTC estimation is way off. As with Lidar, describe your observations again and also look into potential reasons.
   * Camera TTC data: The results of Camera TTC is saved in the `cameraTTC.csv` in the build folder.
-  * Lidar TTC Performance:
-    1.
+  * Camera TTC Performance:
+    1. As shown in the cameraTTC.csv, many combinations of detectors and descriptors result in NaN or negative values when calculating TTC. This indicates that using Camera TTC requires more caution compared to Lidar TTC.
+    2. The following graph is a comparison after removing combinations with negative or NaN values. It suggests that the most stable combination, with data trends similar to Lidar TTC, is the **AKAZE detector and BRIEF descriptor**.
     <img src = "TTC Comparison.png"/>
