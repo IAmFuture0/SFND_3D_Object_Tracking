@@ -41,15 +41,25 @@ In this final project, you will implement the missing parts in the schematic. To
   * Implementation: The **matchBoundingBoxes** is implemented `from Line 251 to 268` in the camFusion_Student.cpp file.
 - [x] FP.2 Compute Lidar based TTC
   * Description: Compute the time-to-collision in second for all matched 3D objects using only Lidar measurements from the matched bounding boxes between current and previous frame.
-  * Implementation: The **computeTTCLidar** is implmented `from Line 220 to 248` in the camFusion_Student.cpp file. Outliers are removed based on the following criteria:
-1. If they are too far away (i.e., the ratio of the outlier to the mean value is smaller than 0.8) from the mean value of the x-coordinates of Lidar points.
-2. If they are not within the ego lane.
+  * Implementation: The **computeTTCLidar** is implmented `from Line 220 to 248` in the camFusion_Student.cpp file.
+  * Note: Outliers are removed based on the following criteria:
+    1. If they are too far away from the mean value of the x-coordinates of Lidar points (i.e., the ratio of the outlier to the mean value is smaller than 0.8).
+    2. If they are not within the ego lane.
 - [x] FP.3 Associate Keypoint Correspondences with Bounding Boxes
   * Description: Prepare the TTC computation based on camera measurements by associating keypoint correspondences to the bounding boxes which enclose them. All matches which satisfy this condition must be added to a vector in the respective bounding box.
-  * Implementation: The **clusterKptMatchesWithROI** is implemented `from Line 139 to 161` in the camFusion_Student.cpp file. The match outliers was removed if their euclidean distances are too far away from the average distance, the ratio of outlier to mean distance is smaller than 0.85, from the mean value of x of lidar points or not in the ego lane.
+  * Implementation: The **clusterKptMatchesWithROI** is implemented `from Line 139 to 161` in the camFusion_Student.cpp file.
+  * Note: Outliers in the matches were removed if their Euclidean distances were too far from the average distance. Specifically, if the ratio of the outlier's distance to the mean distance was smaller than 0.85, it was considered an outlier and removed.
 - [x] FP.4 Compute Camera-based TTC
   * Description: Compute the time-to-collision in second for all matched 3D objects using only keypoint correspondences from the matched bounding boxes between current and previous frame.
+  * Implementation: The **computeTTCCamera** is implemented `from Line 165 to 217` in the camFusion_Student.cpp file.
+  * Note:  
+    1. Outliers in the distance ratios were removed if they are not within the range of first quartile and third quartile.
+    2. Lidar TTC was calculated using the mean value of the inliers.
 - [x] FP.5 Performance Evaluation 1 (Lidar TTC result)
   * Description: Find examples where the TTC estimate of the Lidar sensor does not seem plausible. Describe your observations and provide a sound argumentation why you think this happened.
+  * Lidar TTC Performance Observation:
+    In the first three frames, the TTC increases from 12.3 to 16.4 seconds. However, the images show that the ego vehicle is getting closer to the front vehicle, indicating that the relative distance is decreasing. According to the Lidar-based TTC formula, this suggests that the relative velocity between the ego car and the front car is decreasing, causing the TTC to increase even though the relative distance is smaller.
+    Additionally, from frame 11 to frame 17, we observe that the TTC in frame 16 suddenly jumps to 11 seconds, despite the fact that everything looks normal in the images during this period.
+    Based on these two observations, we can conclude that the constant velocity model doesn't estimate TTC accurately in this scenario. In urban areas, where stop-and-go situations are common, acceleration and deceleration occur frequently. Therefore, using a constant acceleration model is much more suitable for tracking the front vehicle.
 - [x] FP.6 Performance Evaluation 2 (Camera TTC result)
   * Description: Run several detector / descriptor combinations and look at the differences in TTC estimation. Find out which methods perform best and also include several examples where camera-based TTC estimation is way off. As with Lidar, describe your observations again and also look into potential reasons.
