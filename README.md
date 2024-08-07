@@ -58,14 +58,14 @@ In this final project, you will implement the missing parts in the schematic. To
 - [x] FP.5 Performance Evaluation 1 (Lidar TTC result)
   * Description: Find examples where the TTC estimate of the Lidar sensor does not seem plausible. Describe your observations and provide a sound argumentation why you think this happened.
   * Lidar TTC data: The results of Lidar TTC is saved in the `lidarTTC.csv` in the build folder.
-  * Lidar TTC Performance Observation: 
+  * Lidar TTC Performance Observations: 
     * In the first three frames, the TTC increases from 12.3 to 16.4 seconds. However, the images show that the ego vehicle is getting closer to the front vehicle, indicating that the relative distance is decreasing. According to the Lidar-based TTC formula, this suggests that the relative velocity between the ego car and the front car is decreasing, causing the TTC to increase even though the relative distance is smaller.
     * Additionally, from frame 11 to frame 17, we observe that the TTC in frame 16 suddenly jumps to 11 seconds, despite the fact that everything looks normal in the images during this period.
     * Based on these two observations, we can conclude that the constant velocity model doesn't estimate TTC accurately in this scenario. In urban areas, where stop-and-go situations are common, acceleration and deceleration occur frequently. Therefore, using a constant acceleration model is much more suitable for tracking the front vehicle.
 - [x] FP.6 Performance Evaluation 2 (Camera TTC result)
   * Description: Run several detector / descriptor combinations and look at the differences in TTC estimation. Find out which methods perform best and also include several examples where camera-based TTC estimation is way off. As with Lidar, describe your observations again and also look into potential reasons.
   * Camera TTC data: The results of Camera TTC is saved in the `cameraTTC.csv` in the build folder.
-  * Camera TTC Performance:
+  * Camera TTC Performance Observations:
     1. As shown in the cameraTTC.csv, many combinations of detectors and descriptors result in NaN or negative values when calculating TTC. This indicates that using Camera TTC requires more caution compared to Lidar TTC.
     2. The following graph is a comparison after removing combinations with negative or NaN values. It suggests that the most stable combination for calcuating Camera based TTC, with data trends similar to Lidar TTC, is the **AKAZE detector and BRIEF descriptor**.
     <img src = "TTC Comparison.png"/>
