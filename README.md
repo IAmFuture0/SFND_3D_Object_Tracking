@@ -67,5 +67,5 @@ In this final project, you will implement the missing parts in the schematic. To
   * Camera TTC data: The results of Camera TTC is saved in the `cameraTTC.csv` in the build folder.
   * Camera TTC Performance:
     1. As shown in the cameraTTC.csv, many combinations of detectors and descriptors result in NaN or negative values when calculating TTC. This indicates that using Camera TTC requires more caution compared to Lidar TTC.
-    2. The following graph is a comparison after removing combinations with negative or NaN values. It suggests that the most stable combination, with data trends similar to Lidar TTC, is the **AKAZE detector and BRIEF descriptor**.
+    2. The following graph is a comparison after removing combinations with negative or NaN values. It suggests that the most stable combination for calcuating Camera based TTC, with data trends similar to Lidar TTC, is the **AKAZE detector and BRIEF descriptor**.
     <img src = "TTC Comparison.png"/>
