@@ -67,4 +67,4 @@ In this final project, you will implement the missing parts in the schematic. To
   * Camera TTC data: The results of Camera TTC is saved in the `cameraTTC.csv` in the build folder.
   * Lidar TTC Performance:
     1.
-    <img src = ""/>
+    <img src = "TTC Comparison.png"/>
